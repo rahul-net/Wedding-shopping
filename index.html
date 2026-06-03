@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>রাজকীয় বিবাহ | Wedding Operations Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Galada&family=Hind+Siliguri:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="global-loader" class="global-loader">
+        <div class="loader-content">
+            <i class="fa-solid fa-gandasa premium-spin"></i>
+            <h2 class="bengali-brand">শুভ বিবাহ</h2>
+            <p>Initializing Secure Database Synchronization...</p>
+        </div>
+    </div>
+
+    <div id="app-shell" class="app-shell hidden">
+        
+        <header class="app-header">
+            <div class="header-left">
+                <span class="brand-subtitle">Royal Bengali</span>
+                <h1 class="brand-title">Wedding Ops</h1>
+            </div>
+            <div class="header-right" id="user-profile-badge">
+                </div>
+        </header>
+
+        <main class="app-main-content" id="main-scroll-container">
+
+            <section id="page-auth" class="view-page hidden">
+                <div class="auth-card-container">
+                    <div class="auth-brand-area">
+                        <i class="fa-solid fa-om brass-icon"></i>
+                        <h2 class="galada-text">পরিনয় উৎসব</h2>
+                        <p class="auth-sub">Enter the Secure Shared Family Space</p>
+                    </div>
+                    <form id="auth-form" class="premium-form">
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-user-tag"></i> Your Name (আপনার নাম)</label>
+                            <input type="text" id="auth-name" required placeholder="e.g., Anirban Mukherjee" autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+                            <input type="email" id="auth-email" required placeholder="family@domain.com" autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fa-solid fa-lock"></i> Account Password</label>
+                            <input type="password" id="auth-password" required placeholder="••••••••" autocomplete="current-password">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <span>Access Platform</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="page-dashboard" class="view-page hidden">
+                <div class="royal-card budget-marquee">
+                    <div class="marquee-header">
+                        <span><i class="fa-solid fa-vault"></i> Global Wedding Treasury</span>
+                        <span id="budget-status-tag" class="badge status-safe">Optimal Balance</span>
+                    </div>
+                    <div class="marquee-main-metric">
+                        <span class="currency-symbol">৳</span><span id="dash-total-budget">0.00</span>
+                    </div>
+                    <div class="budget-progress-container">
+                        <div id="budget-progress-bar" class="progress-bar-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="marquee-sub-grid">
+                        <div class="sub-metric">
+                            <label>Spent So Far</label>
+                            <p class="metric-val text-danger">৳<span id="dash-spent-budget">0.00</span></p>
+                        </div>
+                        <div class="sub-metric">
+                            <label>Remaining Capital</label>
+                            <p class="metric-val text-success">৳<span id="dash-remaining-budget">0.00</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-strip">
+                    <div class="strip-card warning-tint">
+                        <label>Pending Expected Cost</label>
+                        <h3>৳<span id="dash-pending-cost">0.00</span></h3>
+                    </div>
+                    <div class="strip-card safe-tint">
+                        <label>Projected Surplus</label>
+                        <h3>৳<span id="dash-projected-remaining">0.00</span></h3>
+                    </div>
+                </div>
+
+                <h3 class="section-title"><i class="fa-solid fa-chart-pie"></i> Logistics Overview</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <i class="fa-solid fa-box-open kpi-icon text-primary"></i>
+                        <div class="kpi-data">
+                            <h4 id="dash-total-items">0</h4>
+                            <p>Total Items</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <i class="fa-solid fa-hourglass-half kpi-icon text-warning"></i>
+                        <div class="kpi-data">
+                            <h4 id="dash-pending-items">0</h4>
+                            <p>Pending Purchases</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <i class="fa-solid fa-circle-check kpi-icon text-success"></i>
+                        <div class="kpi-data">
+                            <h4 id="dash-purchased-items">0</h4>
+                            <p>Procured</p>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <i class="fa-solid fa-users kpi-icon text-info"></i>
+                        <div class="kpi-data">
+                            <h4 id="dash-total-members">0</h4>
+                            <p>Family Registries</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-feed-wrapper">
+                    <div class="feed-header">
+                        <h3><i class="fa-solid fa-bolt-lightning"></i> Recent Operational Activity</h3>
+                    </div>
+                    <div id="dash-activity-stream" class="activity-stream">
+                        </div>
+                </div>
+            </section>
+
+            <section id="page-items" class="view-page hidden">
+                <div class="search-filter-card">
+                    <div class="search-box-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="filter-search" placeholder="Search item, member, or buyer...">
+                    </div>
+                    <div class="filter-controls-row">
+                        <select id="filter-event">
+                            <option value="">All Events (সব অনুষ্ঠান)</option>
+                        </select>
+                        <select id="filter-member">
+                            <option value="">All Members (সব সদস্য)</option>
+                        </select>
+                        <select id="filter-status">
+                            <option value="">All Statuses</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Purchased">Purchased</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="items-cards-container" class="items-cards-grid">
+                    </div>
+            </section>
+
+            <section id="page-members" class="view-page hidden">
+                <div class="registry-card">
+                    <h3><i class="fa-solid fa-users-gear"></i> Family Member Accounts</h3>
+                    <p class="section-desc-text">Assigned family members responsible for planning assignments and purchasing procurement allocations.</p>
+                    <div id="members-list-container" class="registry-list">
+                        </div>
+                </div>
+            </section>
+
+            <section id="page-reports" class="view-page hidden">
+                <div class="report-gateway-card">
+                    <i class="fa-solid fa-file-invoice-dollar report-hero-icon"></i>
+                    <h2>Analytical Report Generation Hub</h2>
+                    <p>Compile production-ready summaries across real-time financial, itemized procurement, and wedding operational states into verified dual-language standard configurations.</p>
+                    
+                    <div class="report-action-panel">
+                        <button class="btn btn-luxury btn-block" id="btn-report-full">
+                            <i class="fa-solid fa-file-pdf"></i> Generate Full Master Audit Report
+                        </button>
+                        <button class="btn btn-warning btn-block" id="btn-report-pending">
+                            <i class="fa-solid fa-hourglass-start"></i> Generate Missing & Pending Items Audit
+                        </button>
+                        <button class="btn btn-success btn-block" id="btn-report-purchased">
+                            <i class="fa-solid fa-clipboard-check"></i> Generate Completed Purchase Receipts
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-admin" class="view-page hidden">
+                <div class="admin-panel-tabs">
+                    <button class="admin-tab-btn active" data-target="admin-sub-budget">Treasury</button>
+                    <button class="admin-tab-btn" data-target="admin-sub-events">Events</button>
+                    <button class="admin-tab-btn" data-target="admin-sub-members">Members</button>
+                    <button class="admin-tab-btn" data-target="admin-sub-logs">Logs</button>
+                    <button class="admin-tab-btn" data-target="admin-sub-bin">Bin</button>
+                </div>
+
+                <div class="admin-content-window">
+                    <div id="admin-sub-budget" class="admin-sub-panel">
+                        <h3>Global Allocation Controls</h3>
+                        <form id="admin-budget-form" class="premium-form inline-form-layout">
+                            <div class="form-group">
+                                <label>Total Allocated Capital Budget (৳)</label>
+                                <input type="number" id="admin-input-budget" required min="1" step="0.01">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Treasury</button>
+                        </form>
+                        <hr class="divider">
+                        <h3>Security Control PIN System</h3>
+                        <form id="admin-pin-form" class="premium-form inline-form-layout">
+                            <div class="form-group">
+                                <label>New Administrative 6-Digit Verification PIN</label>
+                                <input type="password" id="admin-input-pin" required maxlength="6" minlength="6" pattern="\d{6}">
+                            </div>
+                            <button type="submit" class="btn btn-gold">Set Security PIN</button>
+                        </form>
+                    </div>
+
+                    <div id="admin-sub-events" class="admin-sub-panel hidden">
+                        <h3>Event Lifecycle Engine</h3>
+                        <form id="admin-event-form" class="premium-form inline-form-layout">
+                            <div class="form-group">
+                                <label>Event Label (Bengali/English Mixed)</label>
+                                <input type="text" id="admin-input-event-name" required placeholder="e.g., সঙ্গীত উৎসব (Sangeet)">
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Inject Event</button>
+                        </form>
+                        <ul id="admin-events-list" class="management-matrix-list"></ul>
+                    </div>
+
+                    <div id="admin-sub-members" class="admin-sub-panel hidden">
+                        <h3>Family Profile Verification Node</h3>
+                        <form id="admin-member-form" class="premium-form inline-form-layout">
+                            <div class="form-group">
+                                <label>Legal Full Name of Member</label>
+                                <input type="text" id="admin-input-member-name" required placeholder="e.g., Sourav Ganguly">
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-user-plus"></i> Bind Profile</button>
+                        </form>
+                        <ul id="admin-members-list" class="management-matrix-list"></ul>
+                    </div>
+
+                    <div id="admin-sub-logs" class="admin-sub-panel hidden">
+                        <h3>System Event Log</h3>
+                        <div id="admin-logs-stream" class="audit-log-stream"></div>
+                    </div>
+
+                    <div id="admin-sub-bin" class="admin-sub-panel hidden">
+                        <h3>Recycle Bin Isolation Environment</h3>
+                        <p class="section-desc-text">Items marked for destruction remain here until permanent erasure or restoration is executed.</p>
+                        <div id="admin-bin-stream" class="bin-data-stream"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <button id="global-fab-trigger" class="fab-trigger-btn">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <div id="global-modal-overlay" class="modal-overlay hidden">
+            <div id="modal-item-form-wrapper" class="modal-window-box hidden">
+                <div class="modal-window-header">
+                    <h3 id="modal-item-title">Add Wedding Inventory Allocation</h3>
+                    <button class="modal-close-btn" onclick="window.WeddingApp.closeActiveModals()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <form id="item-operation-form" class="premium-form">
+                    <input type="hidden" id="form-item-id">
+                    <div class="form-group">
+                        <label>Item Descriptive Identification Name</label>
+                        <input type="text" id="form-item-name" required placeholder="e.g., বেনারসি শাড়ি (Premium Banarasi Saree)">
+                    </div>
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label>Assigned Wedding Event</label>
+                            <select id="form-item-event" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Responsible Assignee Family Member</label>
+                            <select id="form-item-member" required></select>
+                        </div>
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" id="form-item-qty" required min="1" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Expected Price (৳)</label>
+                            <input type="number" id="form-item-expected" required min="0" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Operational Status</label>
+                            <select id="form-item-status" required>
+                                <option value="Pending">Pending Purchase Allocation</option>
+                                <option value="Purchased">Procured / Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group id-actual-price-wrapper hidden" id="actual-price-field-block">
+                        <label>Actual Procured Price Verification (৳)</label>
+                        <input type="number" id="form-item-actual" min="0" step="0.01" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Operational Descriptive Field Notes</label>
+                        <textarea id="form-item-notes" rows="2" placeholder="Provide extra vendor links, sizes, instructions..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" id="form-item-submit-btn">Commit Asset Entry</button>
+                </form>
+            </div>
+
+            <div id="modal-pin-prompt-wrapper" class="modal-window-box hidden verification-box">
+                <div class="modal-window-header">
+                    <h3>Secure PIN Authorization Required</h3>
+                    <button class="modal-close-btn" onclick="window.WeddingApp.closeActiveModals()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="pin-prompt-form-content">
+                    <p>Provide your 6-digit administrative operations clearance security verification PIN to perform this itemized structural transaction.</p>
+                    <div class="pin-input-row">
+                        <input type="password" id="security-pin-input-field" maxlength="6" minlength="6" autocomplete="one-time-code" placeholder="••••••" autofocus pattern="\d{6}">
+                    </div>
+                    <button id="security-pin-submit-btn" class="btn btn-danger btn-block">Authorize Transaction Signature</button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="app-bottom-navbar">
+            <button class="nav-nav-item active" data-page="page-dashboard">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-nav-item" data-page="page-items">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <span>Items</span>
+            </button>
+            <button class="nav-nav-item" data-page="page-members">
+                <i class="fa-solid fa-address-book"></i>
+                <span>Members</span>
+            </button>
+            <button class="nav-nav-item" data-page="page-reports">
+                <i class="fa-solid fa-chart-bar"></i>
+                <span>Reports</span>
+            </button>
+            <button class="nav-nav-item hidden" id="nav-item-admin-tab" data-page="page-admin">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Admin</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
